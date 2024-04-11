@@ -5,6 +5,7 @@ __pycache__/
 /build/
 /out/
 /bak/
+/log/
 config.ini
 Dockerfile
 nuitka.ps1

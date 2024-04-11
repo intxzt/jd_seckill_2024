@@ -8,6 +8,7 @@ __pycache__/
 /doc/
 /hook/
 /.git/
+/log/
 config.ini
 Dockerfile
 nuitka.ps1

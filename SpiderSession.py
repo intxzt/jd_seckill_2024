@@ -1,4 +1,7 @@
 import json
+
+import urllib3
+
 from jd_logger import logger
 from urllib import parse
 from urllib.parse import urlparse, parse_qs
@@ -8,10 +11,12 @@ from config import global_config
 from sign.jdSign import getSignWithstv
 import util
 
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 
 def url_params_to_json():
     # 期望的参数列表
-    expected_params = ['functionId', 'clientVersion', 'build', 'client', 'partner', 'oaid', 'sdkVersion', 'lang',
+    expected_params = ['functionId', 'clientVersion', 'build', 'client', 'partner', 'sdkVersion', 'lang',
                        'harmonyOs', 'networkType', 'uts', 'uemps', 'ext', 'eid', 'x-api-eid-token', 'ef', 'ep']
 
     api_jd_url = global_config.getRaw('config', 'api_jd_url')
@@ -77,6 +82,7 @@ class SpiderSession:
         session = requests.session()
         session.headers = self.get_headers()
         session.cookies = self.init_cookies()
+        session.verify = False
         return session
 
     def get_headers(self):
